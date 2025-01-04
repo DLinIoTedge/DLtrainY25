@@ -72,4 +72,75 @@ To train a deep learning network using the `DLtrain` application, follow these s
 
 -------
 
+# Inference with `DLtrain`
+
+The `DLtrain` application is not only capable of training deep learning networks but also allows users to perform **inference** using a pre-trained model. Inference refers to the process of using a trained model to make predictions on new, unseen data. Below is a breakdown of how to run inference using the `DLtrain` tool, including an explanation of the used switches.
+
+## Inference Output Example
+
+When running the following inference command:
+
+```bash
+./DLtrain -m infer -c config.txt -s jjnet.dat -n 5 -f img.raw
+
+The application will provide output such as:
+
+Loaded 5 image data!
+Constructed required matrices.
+Loaded network successfully!
+Running inference on 5 images. 
+Number: 5 | Guessed: 0 | Accuracy: -nan
+Number: 0 | Guessed: 0 | Accuracy: 100
+Number: 4 | Guessed: 9 | Accuracy: 50
+Number: 1 | Guessed: 1 | Accuracy: 66.6667
+Number: 9 | Guessed: 9 | Accuracy: 75
+
+This shows that DLtrain is successfully performing inference on 5 image samples. The output for each image contains:
+
+Number: The actual digit of the image.
+
+Guessed: The predicted digit made by the model.
+
+Accuracy: The percentage of accuracy for each prediction.
+
+
+For example:
+
+For the first image (digit "5"), the model guessed "0", which resulted in an accuracy of NaN (Not a Number), possibly due to issues in the network's prediction.
+
+For the second image (digit "0"), the guess was correct with an accuracy of 100%.
+
+Other predictions showed varying levels of accuracy, such as 50%, 66.67%, and 75%, depending on the complexity of the model and the image.
+
+
+Explanation of Command-Line Switches
+
+1. -m infer
+
+The -m switch is used to specify the mode in which the application should run. In this case, infer mode tells the program to perform inference using a pre-trained model. This is in contrast to the train mode, which is used for training the model on the dataset.
+
+2. -c config.txt
+
+The -c switch is used to specify the configuration file (config.txt in this case). This file contains the parameters and settings required to run the model. It defines the architecture of the deep learning network and ensures that the model is properly loaded and used for inference.
+
+3. -s jjnet.dat
+
+The -s switch specifies the pre-trained model file. Here, jjnet.dat is the file containing the trained model that was saved after the training process. During inference, the application will load this model to make predictions on the new image data.
+
+4. -n 5
+
+The -n switch specifies the number of images used for inference. In this example, 5 indicates that 5 images from the dataset will be used to test the trained model. The network will process each image and make a prediction based on the learned features.
+
+5. -f img.raw
+
+The -f switch is used to specify the input image file or image data file (img.raw). This file contains raw image data that the model will process to make predictions. It should contain image data in a specific format, which the application expects for inference.
+
+Conclusion
+
+By running the DLtrain application in inference mode, users can evaluate the performance of a pre-trained model on new image data. The accuracy of the predictions gives valuable insights into how well the model generalizes to unseen data.
+
+This feature of DLtrain is useful for testing and evaluating the trained models, allowing users to see how accurately their deep learning networks can predict digits from the MNIST dataset or other image datasets.
+
+You can copy and paste this markdown content into your `README.md` or `README.txt` file, and it will be properly formatted for easy readability.
+
     
