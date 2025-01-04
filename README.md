@@ -80,9 +80,9 @@ The `DLtrain` application is not only capable of training deep learning networks
 
 When running the following inference command:
 
-      ```bash
+     
       ./DLtrain -m infer -c config.txt -s jjnet.dat -n 5 -f img.raw
-      --
+   
 
 The application will provide output such as:
 
