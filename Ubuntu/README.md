@@ -148,4 +148,229 @@ This feature of DLtrain is useful for testing and evaluating the trained models,
 
 You can copy and paste this markdown content into your `README.md` or `README.txt` file, and it will be properly formatted for easy readability.
 
-    
+
+    ---
+
+# DLtrain Build and Setup Documentation
+
+Introduction
+
+DLtrain is a deep learning training and inference application designed to train and evaluate deep neural networks using the MNIST dataset. This document provides detailed instructions on how to build and set up DLtrain using CMake and make. It also outlines the required GCC and G++ versions to ensure a smooth setup process.
+
+System Requirements
+
+Operating System: Ubuntu Linux (also compatible with other Linux distributions).
+
+Required GCC and G++ versions:
+
+GCC version: 13.3.0-3
+
+G++ version: 13.3.0-3
+
+
+
+Ensure that you have the appropriate versions of GCC and G++ installed on your machine. You can check your current version by running:
+
+      gcc --version
+      g++ --version
+
+How to Install GCC 13.3.0-3 (Niranjan Kumar Version)
+
+If you need to install or upgrade to GCC and G++ version 13.3.0-3, follow these steps on Ubuntu:
+
+1. Add the Toolchain Repository:
+
+      sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+      sudo apt update
+
+
+2. Install GCC and G++ 13:
+
+      sudo apt install gcc-13 g++-13
+
+
+3. Update the Default GCC and G++ Versions:
+
+      sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100
+      sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
+
+
+4. Verify the Installation: Check that the correct versions are installed:
+
+      gcc --version
+      g++ --version
+
+You should see something like:
+
+gcc (Ubuntu 13.3.0-3ubuntu1~22.04) 13.3.0
+
+
+
+
+---
+
+Steps to Build DLtrain
+
+1. Clone the Repository
+
+Clone the DLtrain repository to your local machine. Replace your-repo-url with the actual URL of the repository.
+
+      git clone your-repo-url
+      cd DLtrain
+
+2. Create a Build Directory
+
+It’s a good practice to build your project in a separate directory from the source code. Create and navigate to a build directory:
+
+      mkdir build
+      cd build
+
+3. Run CMake to Configure the Build
+
+CMake will configure the project by generating the necessary makefiles. Run the following command from the build directory:
+
+      cmake ..
+
+This command will configure the build process, detect the compiler, and prepare the necessary build files.
+
+4. Build the Project Using Make
+
+Once the configuration is complete, you can build the project using the following command:
+
+      make
+
+This command will compile the source files and generate the executable DLtrain in the build directory.
+
+5. Verify the Build
+
+After the build process is complete, you can verify that the executable was successfully created by listing the contents of the build directory:
+
+      ls
+
+You should see the DLtrain executable in the directory.
+
+
+---
+
+Running DLtrain
+
+Once you have successfully built DLtrain, you can run it with different modes for training and inference.
+
+Running DLtrain in Training Mode
+
+      ./DLtrain -m train -c config.txt -s Network1.dat -n 2000 -e 30 -d Images/
+
+Explanation of Command-Line Arguments:
+
+      -m train: Puts DLtrain in training mode.
+
+      -c config.txt: Specifies the configuration file that contains the neural network parameters.
+
+      -s Network1.dat: Output file where the trained neural network will be saved.
+
+      -n 2000: Number of images used for the training dataset.
+
+      -e 30: Number of epochs for training.
+
+      -d Images/: Directory containing the MNIST dataset.
+
+
+Running DLtrain in Inference Mode
+
+      ./DLtrain -m infer -c config.txt -s jjnet.dat -n 5 -f img.raw
+
+Explanation of Command-Line Arguments for Inference:
+
+      -m infer: Puts DLtrain in inference mode.
+
+      -c config.txt: Specifies the configuration file with the trained neural network.
+
+      -s jjnet.dat: Specifies the trained network file.
+
+      -n 5: Number of images to run inference on.
+
+      -f img.raw: Specifies the raw image file(s) for inference.
+
+
+Sample Output (Inference Mode)
+
+      Loaded 5 image data!
+      Constructed required matrices.
+      Loaded network successfully!
+      Running inference on 5 images.
+      Number: 5 | Guessed: 0 | Accuracy: -nan
+      Number: 0 | Guessed: 0 | Accuracy: 100
+      Number: 4 | Guessed: 9 | Accuracy: 50
+      Number: 1 | Guessed: 1 | Accuracy: 66.6667
+      Number: 9 | Guessed: 9 | Accuracy: 75
+
+
+---
+
+CMake Configuration File
+
+Here is a sample CMakeLists.txt configuration for building DLtrain:
+
+      cmake_minimum_required(VERSION 3.10)
+      project(DLtrain)
+
+      # Set the C++ standard
+      set(CMAKE_CXX_STANDARD 17)
+      set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+      # Specify the compiler explicitly for Linux (if needed)
+      set(CMAKE_C_COMPILER "/usr/bin/gcc")
+      set(CMAKE_CXX_COMPILER "/usr/bin/g++")
+
+      # Add source files
+      set(SOURCES
+          main.cpp
+          matrix.cpp
+          MNISTRead.cpp
+          CNN.cpp
+      )
+
+      # Add the executable
+      add_executable(${PROJECT_NAME} ${SOURCES})
+
+      # Include additional compiler flags
+      target_compile_options(${PROJECT_NAME} PRIVATE
+          -fdiagnostics-color=always
+          -g
+      )
+
+      # Link the standard C++ library (if required)
+      target_link_libraries(${PROJECT_NAME} PRIVATE stdc++)
+
+
+---
+
+Troubleshooting
+
+1. "Segmentation fault" on Execution
+
+Ensure that the input dataset is correctly formatted.
+
+Double-check that the configuration file (config.txt) is set up properly.
+
+Use debugging tools such as gdb to analyze core dumps if segmentation faults persist.
+
+
+2. Compiler or Build Errors
+
+If you encounter build issues, make sure you are using GCC and G++ versions 13.3.0-3. You can check the installed versions with:
+
+      gcc --version
+      g++ --version
+
+If your GCC and G++ versions are outdated, update them using the steps mentioned earlier.
+
+
+---
+
+Conclusion
+
+This guide provides the necessary steps to build and run DLtrain on your machine using CMake and make. Ensure that you have the required GCC and G++ versions (13.3.0-3) installed for smooth compilation and execution. Follow the build steps carefully, and you should be able to train and infer deep learning models successfully.
+
+
+---
