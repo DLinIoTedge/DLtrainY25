@@ -43,6 +43,7 @@ To train a deep learning network using the `DLtrain` application, follow these s
    ```bash
    ./DLtrain -m train -c config.txt -s jjnet1.dat -n 2000 -e 30 -d Images/
 
+![t2](https://github.com/user-attachments/assets/4ae52413-5490-456d-82a6-974e68fed8e0)
 
 
     jk@jkhome:~/cDLtrain/Jan4Y25$ ./DLtrain -m train  -c config.txt  -s jjnet1.dat -n 2000 -e 30 -d Images/
@@ -136,8 +137,11 @@ The -n switch specifies the number of images used for inference. In this example
 
 The -f switch is used to specify the input image file or image data file (img.raw). This file contains raw image data that the model will process to make predictions. It should contain image data in a specific format, which the application expects for inference.
 
-Conclusion
 
+![t1](https://github.com/user-attachments/assets/c022530a-89f7-4088-b1c0-98e852992b65)
+
+
+Conclusion :
 By running the DLtrain application in inference mode, users can evaluate the performance of a pre-trained model on new image data. The accuracy of the predictions gives valuable insights into how well the model generalizes to unseen data.
 
 This feature of DLtrain is useful for testing and evaluating the trained models, allowing users to see how accurately their deep learning networks can predict digits from the MNIST dataset or other image datasets.
