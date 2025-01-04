@@ -80,20 +80,21 @@ The `DLtrain` application is not only capable of training deep learning networks
 
 When running the following inference command:
 
-```bash
-./DLtrain -m infer -c config.txt -s jjnet.dat -n 5 -f img.raw
+      ```bash
+      ./DLtrain -m infer -c config.txt -s jjnet.dat -n 5 -f img.raw
+      --
 
 The application will provide output such as:
 
-Loaded 5 image data!
-Constructed required matrices.
-Loaded network successfully!
-Running inference on 5 images. 
-Number: 5 | Guessed: 0 | Accuracy: -nan
-Number: 0 | Guessed: 0 | Accuracy: 100
-Number: 4 | Guessed: 9 | Accuracy: 50
-Number: 1 | Guessed: 1 | Accuracy: 66.6667
-Number: 9 | Guessed: 9 | Accuracy: 75
+      Loaded 5 image data!
+      Constructed required matrices.
+      Loaded network successfully!
+      Running inference on 5 images. 
+      Number: 5 | Guessed: 0 | Accuracy: -nan
+      Number: 0 | Guessed: 0 | Accuracy: 100
+      Number: 4 | Guessed: 9 | Accuracy: 50
+      Number: 1 | Guessed: 1 | Accuracy: 66.6667
+      Number: 9 | Guessed: 9 | Accuracy: 75
 
 This shows that DLtrain is successfully performing inference on 5 image samples. The output for each image contains:
 
